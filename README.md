@@ -1,4 +1,4 @@
-# T2K_NextCloud
+# T2K NextCloud operations
 Simple file operations using NextCloud at KCL for the T2K experiment.
 
 Currently supporting `ls` operation using `curl` and `python`'s `xml` parser through NextCloud and WebDAV. 
