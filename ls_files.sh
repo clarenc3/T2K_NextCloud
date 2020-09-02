@@ -10,7 +10,8 @@ fi
 user="ASGReader"
 #user="T2KSKReader"
 
-folder="https://nextcloud.nms.kcl.ac.uk/remote.php/dav/files/${user}"
+folder="https://nextcloud.nms.kcl.ac.uk/remote.php/dav/files/${user%%:*}"
+#folder="https://nextcloud.nms.kcl.ac.uk/remote.php/dav/files/ASGReader"
 subfolder=$1
 
 output="test"

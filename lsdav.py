@@ -46,10 +46,8 @@ for child in root:
       if mod is not None:
         Mod = mod.text
         Mod = datetime.datetime.strptime(Mod, "%a, %d %b %Y %H:%M:%S %Z")
-      if size is not None:
+      if size is not None and Size != 0:
         Size = float(size.text)/(1024**2)
-      elif Size == 0:
-        Size = 0
 
 
     if Folder == "" or Mod == "":
@@ -57,7 +55,7 @@ for child in root:
 
   if First == "":
     First = Folder
-    print "Folder: "
+    print "Folder: ",
   else:
     #print len(First), len(Folder)
     #Folder = Folder[len(First), len(Folder)]
