@@ -46,8 +46,10 @@ for child in root:
       if mod is not None:
         Mod = mod.text
         Mod = datetime.datetime.strptime(Mod, "%a, %d %b %Y %H:%M:%S %Z")
-      if size is not None and Size != 0:
-        Size = float(size.text)/(1024**2)
+      if size is not None and size.text is not None:
+        Size = float(size.text)
+        if Size != 0:
+          Size = Size/(1024**2)
 
 
     if Folder == "" or Mod == "":
