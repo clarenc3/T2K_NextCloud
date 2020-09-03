@@ -3,7 +3,7 @@ Simple file operations using NextCloud at KCL for the T2K experiment.
 
 Currently supporting `ls` operation using `curl` and `python`'s `xml` parser through NextCloud and WebDAV. 
 
-Aiming to keep ***dependencies absolutely minimal*** to easily deploy at multiple Universities and clusters.
+Aiming to keep ***dependencies absolutely minimal*** to easily deploy at multiple Universities and computing clusters, requiring minimal user priviliges.
 
 ### Example usage
 
@@ -25,8 +25,10 @@ Aiming to keep ***dependencies absolutely minimal*** to easily deploy at multipl
 * To change the DAV folder for the NextCloud server, modify the `folder` variable in `ls_files.sh`
 
 ### Extensions and plans
-* File getter (with support for recursive operations)
+* File getter (with support for recursive and folder operations)
 
-* File putter (with support for recursive operations)
+* File putter (with support for recursive and folder operations)
 
 * `mkdir` operations on the remote NextCloud server
+
+* Contact: [c.wret@rochester.edu](mailto:c.wret@rochester.edu)
