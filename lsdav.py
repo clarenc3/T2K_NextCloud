@@ -65,7 +65,11 @@ for child in root:
     #Folder = Folder[:Folder.lfind(First)]
 
   print Folder
-  print "    Size:", '{0:.2f}'.format(Size), "MB"
+  if Size != 0:
+    print "    File"
+    print "    Size:", '{0:.2f}'.format(Size), "MB"
+  else:
+    print "    Directory"
   print "    Last Modified:", Mod
 
       #for each in prop:
