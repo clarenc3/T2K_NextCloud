@@ -27,12 +27,24 @@ if FromArg == True:
 # Get the root of the tree
 root = tree.getroot()
 
+#for elem in tree.iter():
+  #print elem.tag, elem.text
+
 # Loop over each entry
 First = ""
+
+# Check first for errors
+if root.tag == "{DAV:}error":
+  message = root.find('{http://sabredav.org/ns}message')
+  print "Error: ",message.text
+  sys.exit(-1)
+
+# Loop over all the children in the root
 for child in root:
   Folder = ""
   Mod = ""
   Size = 0
+
   for kid in child:
     # Extract the hyperlink folder
     if kid.tag == "{DAV:}href":
@@ -54,39 +66,46 @@ for child in root:
     if Folder == "" or Mod == "":
       continue
 
+  # If this is the top folder, print it
+  topfolder = False
   if First == "":
     First = Folder
-    print "Folder: ",
+    print "Top folder: ",
+    topfolder = True
   else:
-    #print len(First), len(Folder)
-    #Folder = Folder[len(First), len(Folder)]
     Folder = Folder.split(First)[-1]
     print " ",
-    #Folder = Folder[:Folder.lfind(First)]
 
   print Folder
-  if Size != 0:
-    print "    File"
-    print "    Size:", '{0:.2f}'.format(Size), "MB"
-  else:
-    print "    Directory"
-  print "    Last Modified:", Mod
+  if not topfolder:
+    if Size != 0:
+      print "    File"
+      print "    Size:", '{0:.2f}'.format(Size), "MB"
+    else:
+      print "    Directory"
 
-      #for each in prop:
-      #for mod in prop.find("{DAV:}getlastmodified"):
-        #print mod.text
+    print "    Last Modified:", Mod
 
-  #print child.tag, child.attrib
-  #for kid in child:
-    #print kid.tag, kid.attrib
 
-#for elem in tree.iter():
-  #print elem.tag, elem.attrib, elem.text
+'''
+for response in root.findall('{DAV:}response'):
+  # The main text
+  href = response.find("{DAV:}href")
+  name=href.text
+  print name
 
-#for response in root.findall('{DAV:}response'):
-  #print response
-  #print response.tag, response.attrib
-  #propstat = response.find('{DAV:}propstat')
-  #prop = propstat.find('{DAV:}prop')
-  #getlastmodified = prop.find('{DAV:}getlastmodified')
-  #print getlastmodified.text
+  for propstat in response.find('{DAV:}propstat'):
+    # Make sure we're getting a property and not a status
+    if propstat.tag != "{DAV:}prop": 
+      continue
+    lastmod = propstat.find('{DAV:}getlastmodified')
+    lastmodtext = lastmod.text
+    print lastmodtext
+
+    size  = propstat.find("{DAV:}getcontentlength")
+    if size is not None:
+      print "File"
+      print float(size.text)/(1024**2)
+    else:
+      print "Directory"
+'''
