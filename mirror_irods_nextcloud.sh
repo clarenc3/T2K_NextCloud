@@ -1,6 +1,15 @@
 #!/bin/bash
 
-# Download QMUL iRODS directory to local, and the upload to KCL NextCloud, removing the file from local once it's uploaded
+### README
+#
+# Download QMUL iRODS directory to local, and the upload to KCL NextCloud, removing the file from local once it's uploaded. Runs file by file, directory by directory, and maintains the directory structure.
+#
+# DOES NOT maintain timestamps of files on QMUL iRODS
+#
+# Requires QMUL iRODS to be set up and able to read directories
+# Uses the "icd" and "ils" in your PATH; be sure they exist
+#
+### END OF README
 
 # QMUL irods directory to back up
 irods_dir="/QMULZone1/home/asg/asg2019oa"
